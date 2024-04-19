@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Launcher : MonoBehaviour {
+public class Launcher : MonoBehaviour 
+{
+    [SerializeField] UserSettings userSettings;
     public GameObject missile;
     private float time;
     public float rate, xPos;
@@ -13,7 +15,7 @@ public class Launcher : MonoBehaviour {
 	void Start () {
         time = rate;
         sound = GetComponent<AudioSource>();
-        sound.volume = GameObject.Find("GameData").GetComponent<GameDatas>().VFXVolume;
+        sound.volume = userSettings.SfxVolume;
     }
 	
 	// Update is called once per frame

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBehaviour : MonoBehaviour {
-
+public class PlayerBehaviour : MonoBehaviour 
+{
+    [SerializeField] UserSettings userSettings;
     // Use this for initialization
     
     private float[] coords = { 0.0f, 0.2f, -0.76f, 0.09f, 0.76f, 0.09f };
@@ -17,7 +18,7 @@ public class PlayerBehaviour : MonoBehaviour {
         {
             if (gData.gunIDs[ gData.currentGuns[i]] != "")
                 GameObject.Instantiate(Resources.Load(gData.gunIDs[gData.currentGuns[i]]) as GameObject, transform.position + new Vector3(coords[2 * i],
-                    coords[2 * i + 1]), Quaternion.identity, transform).GetComponent<AudioSource>().volume = gData.VFXVolume;       
+                    coords[2 * i + 1]), Quaternion.identity, transform).GetComponent<AudioSource>().volume = userSettings.SfxVolume;       
         }
         if (gData.missileIDs[gData.currentMissiles[0]] != "")
             GameObject.Instantiate(Resources.Load(gData.missileIDs[gData.currentMissiles[0]]) as GameObject, transform.position + new Vector3(-0.3625f, 0.045f), 

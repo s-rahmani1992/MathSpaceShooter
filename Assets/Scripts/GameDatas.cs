@@ -4,12 +4,12 @@ using UnityEngine;
 using System;
 using TapsellSDK;
 
-public class GameDatas : MonoBehaviour {
+public class GameDatas : MonoBehaviour 
+{
     public int seconds, rights, wrongs, loses, bestscore, difficulty, enemies;
     public DateTime start;
     private static GameDatas x;
     public int meterRecord, coinCount;
-    public float VFXVolume, musicVolume;
     //public int[] PlayerGuns = new int[3];
     public string[] gunIDs, missileIDs;
     public int[] gunBuyIndexes, currentGuns, missileBuyIndexes, currentMissiles;
@@ -30,8 +30,6 @@ public class GameDatas : MonoBehaviour {
         seconds = PlayerPrefs.GetInt("timePlayed");
         bestscore = PlayerPrefs.GetInt("BestScore");
         enemies = PlayerPrefs.GetInt("Enemies");
-        VFXVolume = PlayerPrefs.GetFloat("VFX") + 0.5f;
-        musicVolume = PlayerPrefs.GetFloat("Music") + 0.5f;
         currentGuns[0] = PlayerPrefs.GetInt("Weapon0") + 1;
         currentGuns[1] = PlayerPrefs.GetInt("Weapon1");
         currentGuns[2] = PlayerPrefs.GetInt("Weapon2");
@@ -83,8 +81,6 @@ public class GameDatas : MonoBehaviour {
         PlayerPrefs.SetInt("Missile2", currentMissiles[1]);
         PlayerPrefs.SetInt("buyMissile1", missileBuyIndexes[0] - 1);
         PlayerPrefs.SetInt("buyMissile2", missileBuyIndexes[1] - 1);
-        PlayerPrefs.SetFloat("VFX", VFXVolume - 0.5f);
-        PlayerPrefs.SetFloat("Music", musicVolume - 0.5f);
         PlayerPrefs.SetInt("Rights", rights);
         PlayerPrefs.SetInt("Wrongs", wrongs);
         PlayerPrefs.SetInt("Loses", loses);

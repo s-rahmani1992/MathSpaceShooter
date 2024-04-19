@@ -1,23 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Musicslider : MonoBehaviour {
-    private GameDatas data;
-    // Use this for initialization
-    void Start () {
-        data = GameObject.Find("GameData").GetComponent<GameDatas>();
+public class MusicSlider : MonoBehaviour, IPointerUpHandler
+{
+    [SerializeField] UserSettings userSettings;
+    [SerializeField] Slider musicSlider;
+    [SerializeField] AudioSource player;
+    
+    void Start () 
+    {
+        musicSlider.value = userSettings.MusicVolume;
+        musicSlider.onValueChanged.AddListener(OnMusicChanged);
     }
 	
-	// Update is called once per frame
-	void Update () {
-        GetComponent<Slider>().value = data.musicVolume;
+	void OnMusicChanged(float value) 
+    {
+        musicSlider.value = value;
+        player.volume = value;
     }
 
-    public void MusicChange()
+    public void OnPointerUp(PointerEventData eventData)
     {
-        data.musicVolume = GetComponent<Slider>().value;
-        data.GetComponent<AudioSource>().volume = data.musicVolume;
+        userSettings.SetMusicVolume(musicSlider.value);
     }
 }

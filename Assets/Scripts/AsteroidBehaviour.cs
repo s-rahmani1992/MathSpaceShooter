@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AsteroidBehaviour : MonoBehaviour {
+public class AsteroidBehaviour : MonoBehaviour 
+{
+    [SerializeField] UserSettings userSettings;
     public short currentNum, num;
     LevelManager level;
     RectTransform healthBar;
@@ -109,7 +111,7 @@ public class AsteroidBehaviour : MonoBehaviour {
             if(other.GetComponent<PlayerBehaviour>().health <= 0)
             {
                 GameObject.Instantiate(level.playerExplosion, other.transform.position, 
-                    Quaternion.identity).GetComponent<AudioSource>().volume = data.VFXVolume;
+                    Quaternion.identity).GetComponent<AudioSource>().volume = userSettings.SfxVolume;
                 GameObject.Destroy(other.gameObject);
                 level.StartCoroutine(level.DestroyPlayer());
             }

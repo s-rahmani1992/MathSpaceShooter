@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour 
+{
+    [SerializeField] UserSettings userSettings;
+
     public GameObject missileExplosion, enemyExplosion;
     // Use this for initialization
     public GameObject tick, cross, coin;
@@ -28,7 +31,7 @@ public class LevelManager : MonoBehaviour {
         pause = GameObject.Find("PauseMenu");
         pause.SetActive(false);
         coins.text = GameObject.Find("GameData").GetComponent<GameDatas>().coinCount.ToString();
-        GetComponent<AudioSource>().volume = GameObject.Find("GameData").GetComponent<GameDatas>().musicVolume;
+        GetComponent<AudioSource>().volume = userSettings.MusicVolume;
         Time.timeScale = 1;
         InvokeRepeating("GenerateAsteroid",2, 3);
         InvokeRepeating("GenerateEnemy", 8, 8);
