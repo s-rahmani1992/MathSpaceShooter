@@ -17,12 +17,12 @@ public class Stats : MonoBehaviour {
         content.GetChild(4).GetComponent<Text>().text = data.enemies.ToString();
         content.GetChild(5).GetComponent<Text>().text = data.loses.ToString();
 
-        content.GetChild(6).GetComponent<Text>().text = Fa.faConvert("رکورد شما");
-        content.GetChild(7).GetComponent<Text>().text = Fa.faConvert("کل مدت بازی شما");
-        content.GetChild(8).GetComponent<Text>().text = Fa.faConvert("تعداد سیارک های درست");
-        content.GetChild(9).GetComponent<Text>().text = Fa.faConvert("تعداد سیارک های اشتباه");
-        content.GetChild(10).GetComponent<Text>().text = Fa.faConvert("تعداد سفینه نابود شده");
-        content.GetChild(11).GetComponent<Text>().text = Fa.faConvert("تعداد باخت");
+        content.GetChild(6).GetComponent<Text>().text = "High Score";
+        content.GetChild(7).GetComponent<Text>().text = "Total Play Duration";
+        content.GetChild(8).GetComponent<Text>().text = "Correct Asteroids";
+        content.GetChild(9).GetComponent<Text>().text = "Wrong Asteroids";
+        content.GetChild(10).GetComponent<Text>().text = "enemies destroyed";
+        content.GetChild(11).GetComponent<Text>().text = "Loses";
         
         data.start = System.DateTime.Now;
         print(Camera.main.WorldToViewportPoint( transform.GetChild(4).position));
