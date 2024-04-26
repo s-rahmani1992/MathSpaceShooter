@@ -12,14 +12,14 @@ public class MissleUpscroller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //if (Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    speed = -0.2f;
-        //}
-        //else if (Input.GetKey(KeyCode.RightArrow))
-        //{
-        //    speed = 0.2f;
-        //}
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            speed = -0.2f;
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            speed = 0.2f;
+        }
 
         if (Input.touchCount > 0)
         {

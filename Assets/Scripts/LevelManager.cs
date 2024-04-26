@@ -7,17 +7,17 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour 
 {
     [SerializeField] UserSettings userSettings;
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameOverMenu gameOverMenu;
 
     public GameObject missileExplosion, enemyExplosion;
     // Use this for initialization
     public GameObject tick, cross, coin;
     public short leftOp, rightOp, goalNum;
     public int meterCount;
-    public Sprite newBest;
     public Sprite[] asteroidNums, asteroidSprite;
     public Color[] enemyColor, asteroidColor;
     public GameObject aster, asterExplosion, playerExplosion, enemy;
-    GameObject gameOver, pause;
     public Text coins, currentProblem;
     public bool EnemyExists;
     GameDatas data ;
@@ -26,33 +26,31 @@ public class LevelManager : MonoBehaviour
         data = GameObject.Find("GameData").GetComponent<GameDatas>();
         EnemyExists = false;
         GenerateMultiplier();
-        gameOver = GameObject.Find("GameOverMenu");
-        gameOver.SetActive(false);
-        pause = GameObject.Find("PauseMenu");
-        pause.SetActive(false);
+        gameOverMenu.gameObject.SetActive(false);
+        pauseMenu.SetActive(false);
         coins.text = GameObject.Find("GameData").GetComponent<GameDatas>().coinCount.ToString();
         GetComponent<AudioSource>().volume = userSettings.MusicVolume;
         Time.timeScale = 1;
-        InvokeRepeating("GenerateAsteroid",2, 3);
-        InvokeRepeating("GenerateEnemy", 8, 8);
+        InvokeRepeating(nameof(GenerateAsteroid), 2, 3);
+        InvokeRepeating(nameof(GenerateEnemy), 8, 8);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(gameOver.activeInHierarchy)
+            if(gameOverMenu.gameObject.activeInHierarchy)
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Upgrade");
             else
             {
-                if (!pause.activeSelf)
+                if (!pauseMenu.activeSelf)
                 {
-                    pause.SetActive(true);
+                    pauseMenu.SetActive(true);
                     Time.timeScale = 0;
                 }
                 else
                 {
-                    pause.SetActive(false);
+                    pauseMenu.SetActive(false);
                     Time.timeScale = 1;
                 }
             } 
@@ -77,26 +75,13 @@ public class LevelManager : MonoBehaviour
         GameDatas data = GameObject.Find("GameData").GetComponent<GameDatas>();
         MeterBehaviour meter = GameObject.Find("meter").GetComponent<MeterBehaviour>();
         int number = meter.currentScore;
-        if (data.bestscore < number)
-        {
+        bool isBest = data.bestscore < number;
+        if (isBest)
             data.bestscore = meter.currentScore;
-            gameOver.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = newBest;
-        }
         data.loses++;
         meter.GetComponent<MeterBehaviour>().enabled = false;
         yield return new WaitForSeconds(2);
-        gameOver.SetActive(true);
-        int index = 0;
-        Transform numbertransform = gameOver.transform.GetChild(0);
-        while (number != 0)
-        {
-            numbertransform.GetChild(index).GetComponent<SpriteRenderer>().sprite = asteroidNums[number % 10];
-            number /= 10;
-            index++;
-            numbertransform.localPosition += new Vector3(0.12f, 0, 0);
-        }
-        for (int i = index; i < 8; i++)
-            numbertransform.GetChild(i).gameObject.SetActive(false);
+        gameOverMenu.Show(number, isBest);
         Time.timeScale = 0;
     }
 

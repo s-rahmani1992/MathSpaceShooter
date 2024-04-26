@@ -48,11 +48,11 @@ public class Launcher : MonoBehaviour
 
         //PC Input
 
-        //if (Input.GetMouseButton(2) && time > rate && Time.timeScale > 0)
-        //{
-        //    GameObject.Instantiate(missile, transform.position + xPos * Vector3.right, Quaternion.identity);
-        //    xPos = -xPos;
-        //    time = 0;
-        //}
+        if (Input.GetMouseButton(2) && time > rate && Time.timeScale > 0)
+        {
+            GameObject.Instantiate(missile, transform.position + xPos * Vector3.right, Quaternion.identity);
+            xPos = -xPos;
+            time = 0;
+        }
     }
 }

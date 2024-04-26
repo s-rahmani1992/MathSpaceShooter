@@ -29,14 +29,14 @@ public class UpScroll : MonoBehaviour {
 	void Update () {
         //PC Input
 
-        //if (Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    speed = -0.2f;
-        //}
-        //else if (Input.GetKey(KeyCode.RightArrow))
-        //{
-        //    speed = 0.2f;
-        //}
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            speed = -0.2f;
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            speed = 0.2f;
+        }
 
         //Android Input
 
